@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Course({course}:{course:any}) {
+export default function Course({course, dpt, num}:{course:any, dpt:any, num:any}) {
     return(
         <div>
-            {course}
+            {course} {dpt} {num}
         </div>
     )
 }
