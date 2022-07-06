@@ -9,7 +9,7 @@ import { addSyntheticLeadingComment } from 'typescript';
 
 function App(this: any) {
   const [courses, setCourse] = useState<any>([])
-  const toAddCourseRef: any = useRef(null)
+  const toAddCourseRef:any = useRef(null)//useRef<HTMLInputElement | null>(null)
   let courseName: string
   let courseNumber: number
 
@@ -27,17 +27,19 @@ function App(this: any) {
       courseName = (document.getElementById("name") as HTMLInputElement).value
       courseNumber = Number((document.getElementById("number") as HTMLInputElement).value)
 
-      console.log('https://api.peterportal.org/rest/v0/schedule/soc?term=2022%20Fall&department=' + courseName + '&courseNumber='+ courseNumber)
+      console.log(`https://api.peterportal.org/rest/v0/schedule/soc?term=2022%20Fall&department=${courseName}&courseNumber=${courseNumber}`)
 
       //fetching api to see if course exists
-      fetch('https://api.peterportal.org/rest/v0/schedule/soc?term=2022%20Fall&department=' + courseNumber + '&courseNumber='+ courseNumber)
+      fetch(`https://api.peterportal.org/rest/v0/schedule/soc?term=2022%20Fall&department=${courseName}&courseNumber=${courseNumber}`)
        .then(res => res.json())
        .then((data) => { 
         
-        //console.log(data["schools"].length)
+        console.log(data)
+        console.log(data["schools"].length)
         if(!(data["schools"].length)){
           alert("Invalid Department or Course Number! Please try again!")
-          return
+          return 
+          
         }else{
           setCourse((prevCourse: any) => {
           return [...prevCourse, { id: uuidv4(), code: courseCode, dpt: courseName, num: courseNumber }]
