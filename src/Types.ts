@@ -31,6 +31,7 @@ export interface MeetingResponse{
 }
 
 export interface UserInputCourse{
+    id: any
     courseCode: number
     courseName: string
     courseNumber: number
